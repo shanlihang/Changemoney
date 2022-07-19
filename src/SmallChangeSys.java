@@ -1,38 +1,39 @@
+//功能类
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import java.util.Date;
+import java.util.SimpleTimeZone;
 
 public class SmallChangeSys {
-    public static void main(String[] args)
-    {
-        //菜单
-        boolean flag = true;
-        Scanner sc = new Scanner(System.in);
-        do {
-            System.out.println("------------零钱通菜单------------");
-            System.out.println("\t\t1.零钱通明细\t\t");
-            System.out.println("\t\t2.收益入账\t\t");
-            System.out.println("\t\t3.消费\t\t");
-            System.out.println("\t\t4.退出系统\t\t");
-            System.out.println("请选择功能：1-4:");
-            int print = sc.nextInt();
-            switch (print){
-                case 1:
-                    System.out.println("零钱通明细");
-                    break;
-                case 2:
-                    System.out.println("收益入账");
-                    break;
-                case 3:
-                    System.out.println("消费");
-                    break;
-                case 4:
-                    System.out.println("退出");
-                    flag = false;
-                    break;
-                default:
-                    System.out.println("你输入的数字有误，请重新输入：");
-            }
-
-        }while (flag);
-        System.out.println("------------已退出零钱通------------");
+    private double balance;//余额
+    private double money = 0;
+    private double con = 0;
+    private String purpose = "";//消费用途
+    String detaild = "";
+    String total = "";
+    Scanner sc = new Scanner(System.in);
+    Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    //零钱通明细
+    public void showBalabce(){
+        System.out.println(total);
+    }
+    //收益入账
+    public void profit(){
+        System.out.println("请输入入账金额:");
+        money = sc.nextDouble();
+        balance += money;
+        detaild = "\n收益入账\t" + "+" + money + "\t" + sdf.format(date) + "\t余额：" + balance;
+        total += detaild;
+    }
+    //消费
+    public void consumption(){
+        System.out.println("请输入消费金额:");
+        con = sc.nextDouble();
+        System.out.println("请输入消费用途:");
+        purpose = sc.next();
+        balance -= con;
+        detaild = "\n" + purpose + "\t\t" + "-" + con + "\t" + sdf.format(date) + "\t余额：" + balance;
+        total += detaild;
     }
 }
